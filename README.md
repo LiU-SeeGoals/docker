@@ -1,50 +1,51 @@
 # What is this repo ❓
 
-This is a repo for seegoals docker config. All the production and development environment are configured from here.
-
+This repo contains the Docker configuration for SeeGoals. It sets up both the production and development environments.
 
 # How to run 🚀
 
-To start all the containers run:
+To start all the containers, run:
+
 ```
 docker compose up
 ```
 
-All the containers are now running.
+All the containers will then start running.
 
-You can go to the url shown in the terminal log when starting the containers to see the website. You should see a slight vibration on the robots. This means the containers started as expected.
+To see the website, navigate to the URL displayed in the terminal log after starting the containers. You should see a slight vibration in the robots, indicating that the containers have started as expected.
 
-# Do you want to code on the AI or the website?
+# Want to code for the AI or the website?
 
-Currently the `docker-compose.yaml` file pulls the code from github. The code that are pulled are from the main branch (techincally it pulls images from github that are created from main branch). When running the code locally do this:
+Currently, the ```docker-compose.yaml``` file pulls the code from GitHub. The code is sourced from the main branch (technically, it pulls docker images created from the main branch). If you want to work on the code locally, follow these steps:
 
-1. do a `git clone` for the repo you want to develop on i.e `controller` or `GameViewer`. You should have this file structure:
+1. Clone the repo you wish to develop (e.g., ```controller``` or ```GameViewer```). Ensure your directory structure looks like this:
+
 ```
 parent_folder
  |- docker (this repo)
- |- controller (or another repo you want to develop on)
+ |- controller (or another repo you want to work on)
 ```
-2. Now you need to make a change to the `docker-compose.yaml` file for it to use the local code instead of the code on github. This is an example on how you do it:
 
-This is how it looks now:
-```  
+2. Modify the ```docker-compose.yaml``` file to use your local code instead of the code on GitHub. Here```s an example:
+
+Currently:
+```
 controller:
     image: ghcr.io/liu-seegoals/controller:latest
     ...
 ```
 
-change to this:
-
-```  
+Change to this:
+```
 controller:
     build: ../controller 
     volumes:
       - ../controller/:/var/controller
     ...
 ```
-(note, above step will be more streamlined later on)
+(Note: This step will be streamlined later.)
 
-This changes from where the code is read to locally. To verify that this works run:
+This change ensures the local code is read. To confirm that this works, run:
 ```
 docker compose build
 ```
@@ -52,15 +53,15 @@ docker compose build
 docker compose up
 ```
 
-You should now see the exact same result as before the changes, since the the code locally is the main branch of the repo, which is the same as the code on github.
+You should see the same result as before because the local code is identical to the main branch on GitHub.
 
-Now change to the branch of the your current issue and start developing
+Now, switch to the branch relevant to your issue and start developing:
 ```
 git checkout your-issue-name-here
 ```
 
-# Do you want to configure docker?
+# Want to configure Docker?
 
-The images are hosted on the Packages tab when under in the repo `https://github.com/LiU-SeeGoals`. There is a Github action set up to build an updated image from every change in branch main. This is done according to this video: `https://www.youtube.com/watch?v=RgZyX-e6W9E&list=LL&index=2&t=308s`.
+The images are available in the Packages tab of the repo at ```https://github.com/LiU-SeeGoals```. A GitHub Action builds and updates an image with every change in the main branch, as shown in this video: ```https://www.youtube.com/watch?v=RgZyX-e6W9E&list=LL&index=2&t=308s```.
 
-Some of the images used in this project are from `https://github.com/RoboCup-SSL`. More images from `Robocup-SLL` will ned to added later on for different configurations.
+Some images are sourced from ```https://github.com/RoboCup-SSL```. More RoboCup-SSL images will be added later for different configurations.
