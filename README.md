@@ -18,11 +18,17 @@ This repo contains the Docker configuration for SeeGoals. It sets up both the pr
 git clone git@github.com:LiU-SeeGoals/docker.git
 ```
 
-4. Then go inside the new folder (repo) called docker `cd docker`. To start all the containers, run:
+4. Then go inside the new folder (repo) called docker `(cd docker)`. To start all the containers, run if you are on linux (recomended):
 
 ```
-docker compose up
+./start.sh
 ```
+On windows you can run:
+```
+./start-windows.ps1
+```
+
+Select the option 1 (start base configuration)
 
 All the containers will then start running.
 
@@ -30,51 +36,7 @@ To see the website, navigate to the URL displayed in the terminal log labeld loc
 
 # Want to code for the AI or the website?
 
-Note: it's recomented to have a basic understanding of docker.
-
-Currently, the ```docker-compose.yaml``` file pulls the code from GitHub. The code is sourced from the main branch (technically, it pulls docker images created from the main branch). If you want to work on the code locally, follow these steps:
-
-1. Clone the repo you wish to develop (e.g., ```controller``` or ```GameViewer```). Ensure your directory structure looks like this:
-
-```
-parent_folder
- |- docker (this repo)
- |- controller (or another repo you want to work on)
-```
-
-2. Modify the ```docker-compose.yaml``` file to use your local code instead of the code on GitHub. Here is an example:
-
-Currently:
-```
-controller:
-    image: ghcr.io/liu-seegoals/controller:latest
-    ...
-```
-
-Change to this:
-```
-controller:
-    build: ../controller 
-    volumes:
-      - ../controller/:/var/controller
-    ...
-```
-(Note: This step will be streamlined later.)
-
-This change ensures the local code is read. To confirm that this works, run:
-```
-docker compose build
-```
-```
-docker compose up
-```
-
-You should see the same result as before because the local code is identical to the main branch on GitHub.
-
-Now, switch to the branch relevant to your issue and start developing:
-```
-git checkout your-issue-name-here
-```
+Run the same command as mentioned above, then select another option depending on where you want to develop. You will automaticly enter the development environment in this terminal (docker container).
 
 # Want to configure Docker?
 
