@@ -26,10 +26,8 @@ services:
     networks:
       - simulation
 
-
   controller:
-    # image: ghcr.io/liu-seegoals/controller:latest
-    build: ../controller 
+    image: ghcr.io/liu-seegoals/controller:latest
     env_file:
       - .env
     tty: true
@@ -38,13 +36,10 @@ services:
     networks:
       - simulation
     volumes:
-      - ../controller/:/var/controller
       - ./.env:/var/controller/.env
-    command: tail -f /dev/null
 
   game-viewer:
-    # image: ghcr.io/liu-seegoals/game-viewer:latest
-    build: ../GameViewer
+    image: ghcr.io/liu-seegoals/game-viewer:latest
     tty: true
     ports:
       - "5173:5173"
@@ -53,9 +48,7 @@ services:
     depends_on:
       - controller
     volumes:
-      - ../GameViewer/:/var/GameViewer
       - ./.env:/.env
-    command: tail -f /dev/null
 
 networks:
   simulation:
